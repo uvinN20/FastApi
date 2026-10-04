@@ -51,16 +51,24 @@ def get_all_products():
 
 
 @app.get("/product/{id}")  # this REST API endpoint returns a product by its ID
-def get_product_by_id(id: int): # this REST API endpoint returns a product by its ID
- for product in products:
-    if product.id == id:
-        return product
-
-    
- return "Product not found"
+def get_product_by_id(id: int):
+    for product in products:
+        if product.id == id:
+            return product
+    return {"error": "Product not found"}
 
 
 @app.post("/product")
-def add_product(product:Product):
-   products.append(product)
-   return product
+def add_product(product: Product):
+    products.append(product)
+    return product
+
+
+@app.put("/product/{id}")
+def update_product(id: int, product: Product):
+    for i in range(len(products)):
+        if products[i].id == id:
+            products[i] = product
+            return  "Product updated successfully"
+        
+    return  "Product not found"
