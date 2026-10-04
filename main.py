@@ -1,4 +1,6 @@
 # pyrefly: ignore [missing-import]
+from itertools import product
+
 from fastapi import FastAPI #this is the main.py file that contains the FastAPI application and defines the REST API endpoints for the product management system.
 from models import Product
 
@@ -56,3 +58,9 @@ def get_product_by_id(id: int): # this REST API endpoint returns a product by it
 
     
  return "Product not found"
+
+
+@app.post("/product")
+def add_product(product:Product):
+   products.append(product)
+   return product
