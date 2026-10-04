@@ -46,3 +46,13 @@ products = [
 @app.get("/products")  # this REST API endpoint returns a list of products
 def get_all_products():
     return products
+
+
+@app.get("/product/{id}")  # this REST API endpoint returns a product by its ID
+def get_product_by_id(id: int): # this REST API endpoint returns a product by its ID
+ for product in products:
+    if product.id == id:
+        return product
+
+    
+ return "Product not found"
