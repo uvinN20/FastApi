@@ -63,6 +63,17 @@ def add_product(product: Product):
     products.append(product)
     return product
 
+@app.delete("/product/{id}")
+def delete_product(id: int):
+    for i in range(len(products)):
+        if products[i].id == id:
+            del products[i]
+            return "Product deleted successfully"
+        
+    return  "Product not found"
+
+
+
 
 @app.put("/product/{id}")
 def update_product(id: int, product: Product):
@@ -72,3 +83,7 @@ def update_product(id: int, product: Product):
             return  "Product updated successfully"
         
     return  "Product not found"
+
+
+
+
