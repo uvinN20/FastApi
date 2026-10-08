@@ -47,6 +47,8 @@ products = [
 
 @app.get("/products")  # this REST API endpoint returns a list of products
 def get_all_products():
+    #db connection 
+    #query
     return products
 
 
