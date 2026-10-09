@@ -1,6 +1,6 @@
 # FastAPI Product Management API
 
-A simple FastAPI application for managing a product catalog in memory. This project demonstrates a minimal REST API with endpoints to list products, retrieve a product by ID, add a new product, and update an existing product.
+A FastAPI application for managing a product catalog stored in MySQL. The API supports listing, retrieving, adding, updating, and deleting products.
 
 ## Features
 
@@ -8,8 +8,18 @@ A simple FastAPI application for managing a product catalog in memory. This proj
 - Retrieve a single product by ID
 - Add a new product
 - Update an existing product
-- In-memory data storage (no database required)
+- MySQL-backed product storage
+- Automatic creation of the products table
+- Sample products inserted when the products table is first created
 - Automatic request validation using Pydantic models
+
+## Run locally
+
+1. Start the MySQL service and create the `fastapi_db` database, or update the connection URL in `database.py` to use another database.
+2. Install the dependencies in your virtual environment: `fastapi`, `uvicorn`, `sqlalchemy`, and `pymysql`.
+3. Start the API with `uvicorn main:app --reload`.
+
+The application creates the `products` table at startup. The initial sample products are inserted only when that table is created for the first time.
 
 ## Project Structure
 
