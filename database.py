@@ -1,10 +1,12 @@
+import os
 from collections.abc import Generator
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
-db_url="mysql+pymysql://root:Uvin@#2001@localhost:3306/fastapi_db"
-db_url = db_url.replace("@#", "%40%23", 1)
+db_url = os.environ.get("DATABASE_URL")
+if not db_url:
+    raise RuntimeError("Set DATABASE_URL to your MySQL SQLAlchemy connection URL before starting the API.")
 engine = create_engine(db_url, pool_pre_ping=True)
 
 

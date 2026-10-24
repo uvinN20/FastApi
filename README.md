@@ -22,7 +22,27 @@ A Python REST API for a MySQL product catalogue, using **FastAPI**, **Pydantic**
    python -m pip install fastapi uvicorn sqlalchemy pymysql
    ```
 
-3. Start MySQL, create the `fastapi_db` database and configure the connection in `database.py` for your local environment.
+3. Start MySQL, create the `fastapi_db` database and set `DATABASE_URL` in the same terminal used to start the API:
+
+   Windows Command Prompt:
+
+   ```cmd
+   set "DATABASE_URL=mysql+pymysql://USER:URL_ENCODED_PASSWORD@localhost:3306/fastapi_db"
+   ```
+
+   PowerShell:
+
+   ```powershell
+   $env:DATABASE_URL = "mysql+pymysql://USER:URL_ENCODED_PASSWORD@localhost:3306/fastapi_db"
+   ```
+
+   Bash:
+
+   ```bash
+   export DATABASE_URL='mysql+pymysql://USER:URL_ENCODED_PASSWORD@localhost:3306/fastapi_db'
+   ```
+
+   Replace the placeholders with local credentials. URL-encode special characters in the username/password. The application reads the shell environment directly; it does not load a `.env` file automatically.
 4. Start the API:
 
    ```bash
@@ -46,4 +66,4 @@ The application creates the products table at startup and inserts sample product
 
 This is a learning project. It has no authentication, and missing-product responses currently return messages rather than HTTP 404 errors. Dependency versions are not pinned.
 
-Database configuration is currently embedded in source. Move it to environment variables before sharing deployment configuration, and replace any real credentials that have been committed.
+Database configuration comes from `DATABASE_URL`; startup fails with a configuration message when it is missing. Earlier revisions contained an embedded database connection. Rotate that password if it was real or reused: removing it from the current file does not remove it from Git history.
